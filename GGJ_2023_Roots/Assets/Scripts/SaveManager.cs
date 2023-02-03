@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem;
 
 public class SaveManager : MonoBehaviour
 {
@@ -17,11 +17,12 @@ public class SaveManager : MonoBehaviour
     }
     private void Update()
     {
+        /*
         if (Keyboard.current.nKey.wasPressedThisFrame)
             Save();
         if (Keyboard.current.nKey.wasPressedThisFrame)
             Load();
-
+        */
     }
     void Save()
     {
