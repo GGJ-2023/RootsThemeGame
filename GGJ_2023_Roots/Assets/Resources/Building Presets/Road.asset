@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 547ab8e880cf88d48a2aa3dd92485605, type: 3}
+  m_Script: {fileID: 11500000, guid: 445c30f4164d1e74d9c91bd1fb410892, type: 3}
   m_Name: Road
   m_EditorClassIdentifier: 
-  cost: 5
+  cost: 2
   costPerTurn: 0
   prefab: {fileID: 6135227147123905889, guid: 4c78636d14afaeb47a32adab97314ce2, type: 3}
   population: 0
