@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildingPlacement : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class BuildingPlacement : MonoBehaviour
 
     public GameObject placementInd;
     public GameObject DestroyInd;
+    private Collider border;
+    public bool canPlace;
+    public MeshRenderer Ground;
+    public float GroundBorderWidth = 2f;
+    
 
     private void Update()
     {
@@ -32,13 +38,21 @@ public class BuildingPlacement : MonoBehaviour
             lastUpdateRate = Time.time;
             curIndicatorPos = Selector.instance.GetCurTilePos();
 
+            canPlace = true;
+            var nb = new Bounds(Ground.bounds.center, new Vector3(Ground.bounds.size.x - GroundBorderWidth, 0f, Ground.bounds.size.z - GroundBorderWidth));
+            if (!nb.Contains(curIndicatorPos))
+            {
+                canPlace = false;
+                return;
+            }
+
             if (currentlyPlacing)
                 placementInd.transform.position = curIndicatorPos;
             else if (currentlyDestroying)
                 DestroyInd.transform.position = curIndicatorPos;
         }
 
-        if (Input.GetMouseButtonDown(0) && currentlyPlacing)
+        if (Input.GetMouseButtonDown(0) && currentlyPlacing && canPlace)
             PlaceBuilding();
         else if (Input.GetMouseButtonDown(0) && currentlyDestroying)
             DestroyBuilding();
@@ -75,14 +89,36 @@ public class BuildingPlacement : MonoBehaviour
 
     void PlaceBuilding()
     {
-        GameObject buildingObj = Instantiate(curBuildingPreset.prefab, curIndicatorPos, Quaternion.identity);
-        // tell city script?
 
-        CancelPlacement();
+            if (GameManager.instance.buildings.Find(x => x.transform.position == curIndicatorPos) != null)
+            {
+                // do something to indicate to the player that they cannot place a building here!
+                StartCoroutine(CannotPlaceBuildingHere());
+                Debug.LogWarning($"You cannot place a building at {curIndicatorPos} !!");
+                return;
+            }
+
+            GameObject buildingObj = Instantiate(curBuildingPreset.prefab, curIndicatorPos, Quaternion.identity);
+            GameManager.instance.OnPlaceBuilding(buildingObj.GetComponent<Building>());
+
+            IEnumerator CannotPlaceBuildingHere()
+            {
+                GameManager.instance.cannotBuildText.text = string.Format($"You cannot place a building here!!");
+
+                yield return new WaitForSeconds(1f);
+
+                GameManager.instance.cannotBuildText.text = null;
+            }
+
     }
 
     void DestroyBuilding()
     {
+        Building buildingToDestroy = GameManager.instance.buildings.Find(x => x.transform.position == curIndicatorPos);
 
+        if(buildingToDestroy != null)
+        {
+            GameManager.instance.OnRemoveBuilding(buildingToDestroy);
+        }
     }
 }
