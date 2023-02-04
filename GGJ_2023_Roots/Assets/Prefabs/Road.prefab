@@ -140,4 +140,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16795ffc281a46a458dd9e05769f80df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: bee5dfdba55e70e45a4d4f704d16405b, type: 2}
   preset: {fileID: 11400000, guid: d990ae58f4988704ba4978cce4e69ac2, type: 2}

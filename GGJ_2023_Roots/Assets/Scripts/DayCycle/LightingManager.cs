@@ -31,12 +31,23 @@ public class LightingManager : MonoBehaviour
             UpdateLighting(TimeOfDay / 120f);
             if (TimeOfDay >= 119f)
             {
-                GameManager.instance.EndDay();
+                StartCoroutine(UpdateDay());
             }
         }
         else
         {
             UpdateLighting(TimeOfDay / 120f);
+        }
+
+        IEnumerator UpdateDay()
+        {
+            GameManager.instance.cannotBuildText.text = string.Format($"Its a new day!");
+
+            yield return new WaitForSeconds(2f);
+
+            GameManager.instance.EndDay();
+
+            GameManager.instance.cannotBuildText.text = null;
         }
     }
     private void UpdateLighting(float timePercent)
