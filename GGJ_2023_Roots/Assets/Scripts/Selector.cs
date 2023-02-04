@@ -9,6 +9,7 @@ public class Selector : MonoBehaviour
 
     public static Selector instance;
 
+
     void Awake()
     {
         instance = this;
@@ -30,7 +31,7 @@ public class Selector : MonoBehaviour
 
         if(plane.Raycast(ray,out rayOut))
         {
-            Vector3 newPos = ray.GetPoint(rayOut)  - new Vector3(0.5f,0.0f,0.5f);
+            Vector3 newPos = ray.GetPoint(rayOut)  - new Vector3(0f,0.0f,0f);
             newPos = new Vector3(Mathf.CeilToInt(newPos.x), 0.0f, Mathf.CeilToInt(newPos.z));
             return newPos;
         }

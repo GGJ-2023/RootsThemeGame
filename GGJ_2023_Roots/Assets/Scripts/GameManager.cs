@@ -102,4 +102,17 @@ public class GameManager : MonoBehaviour
             curPopulation = curFood;
 
     }
+    public void DoubleSpeedUp()
+    {
+        Time.timeScale = 2f;
+    }
+    public void TripleSpeedUp()
+    {
+        Time.timeScale = 3f;
+    }
+    public void NormalSpeed()
+    {
+        Time.timeScale = 1f;
+    }
+
 }

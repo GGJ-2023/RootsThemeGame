@@ -94,4 +94,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16795ffc281a46a458dd9e05769f80df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 290866d868b58f7449f7b79a3cd50c6b, type: 2}
   preset: {fileID: 11400000, guid: 007b70d454e92d9409fbfaf6cb0f5f8d, type: 2}

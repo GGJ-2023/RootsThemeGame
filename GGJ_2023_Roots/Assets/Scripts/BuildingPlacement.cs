@@ -24,9 +24,17 @@ public class BuildingPlacement : MonoBehaviour
     public static BuildingPlacement instance;
     public BuildingPreset preset;
 
+    public GameObject tree;
+    //public Vector3 position = new Vector3(0f,0f,0f);
+
     private void Awake()
     {
         instance = this;
+        
+    }
+    private void Start()
+    {
+        GameObject tree = Instantiate(curBuildingPreset.prefab, curIndicatorPos, Quaternion.identity);
     }
 
 
@@ -122,7 +130,7 @@ public class BuildingPlacement : MonoBehaviour
                 return;
             }
 
-        if (GameManager.instance.nutrients >= preset.cost)
+        if (GameManager.instance.nutrients > preset.cost)
         {
             GameObject buildingObj = Instantiate(curBuildingPreset.prefab, curIndicatorPos, Quaternion.identity);
             GameManager.instance.OnPlaceBuilding(buildingObj.GetComponent<Building>());
