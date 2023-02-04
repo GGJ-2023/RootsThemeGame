@@ -20,7 +20,15 @@ public class BuildingPlacement : MonoBehaviour
     public bool canPlace;
     public MeshRenderer Ground;
     public float GroundBorderWidth = 2f;
-    
+
+    public static BuildingPlacement instance;
+    public BuildingPreset preset;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
 
     private void Update()
     {
@@ -67,7 +75,9 @@ public class BuildingPlacement : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(0) && currentlyPlacing && canPlace)
+        {
             PlaceBuilding();
+        }
         else if (Input.GetMouseButtonDown(0) && currentlyDestroying)
             DestroyBuilding();
     }
@@ -83,7 +93,7 @@ public class BuildingPlacement : MonoBehaviour
         placementInd.SetActive(true);
         placementInd.transform.position = new Vector3(0, -99, 0);
     }
-    void CancelPlacement()
+    public void CancelPlacement()
     {
         currentlyPlacing = false;
         placementInd.SetActive(false);
@@ -108,16 +118,35 @@ public class BuildingPlacement : MonoBehaviour
             {
                 // do something to indicate to the player that they cannot place a building here!
                 StartCoroutine(CannotPlaceBuildingHere());
-                Debug.LogWarning($"You cannot place a building at {curIndicatorPos} !!");
+                Debug.LogWarning($"You cannot place a building at {curIndicatorPos}!");
                 return;
             }
 
+        if (GameManager.instance.nutrients >= preset.cost)
+        {
             GameObject buildingObj = Instantiate(curBuildingPreset.prefab, curIndicatorPos, Quaternion.identity);
             GameManager.instance.OnPlaceBuilding(buildingObj.GetComponent<Building>());
+        }
+        else
+        {
+            StartCoroutine(NoNutrients());
+            Debug.LogWarning($"You do not have enough nutrients.");
+            return;
+        }
+
 
             IEnumerator CannotPlaceBuildingHere()
             {
                 GameManager.instance.cannotBuildText.text = string.Format($"You cannot place a building here!!");
+
+                yield return new WaitForSeconds(1f);
+
+                GameManager.instance.cannotBuildText.text = null;
+            }
+
+            IEnumerator NoNutrients()
+            {
+                GameManager.instance.cannotBuildText.text = string.Format($"You do not have enough nutrients.");
 
                 yield return new WaitForSeconds(1f);
 
