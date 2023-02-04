@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Road
   m_EditorClassIdentifier: 
   id: Road
-  spawnPrefab: {fileID: 6135227147123905889, guid: 4c78636d14afaeb47a32adab97314ce2, type: 3}
+  spawnPrefab: {fileID: 4318280288599452794, guid: ffa0afcc1e14a504593226973da0fd09, type: 3}
