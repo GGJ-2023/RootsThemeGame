@@ -101,4 +101,8 @@ public class GameManager : MonoBehaviour
 
         }
     }
+    void OpenMenu()
+    {
+
+    }
 }

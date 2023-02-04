@@ -24,13 +24,20 @@ public class BuildingPlacement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && currentlyPlacing == true)
         {
             CancelPlacement();
-            if (currentlyDestroying == true)
-                currentlyDestroying = !currentlyDestroying;
-                DestroyInd.SetActive(currentlyDestroying);
         }
+        else if (Input.GetKeyDown(KeyCode.Escape) && currentlyDestroying == true)
+        {
+            currentlyDestroying = !currentlyDestroying;
+            DestroyInd.SetActive(currentlyDestroying);
+        }
+        else
+        {
+            GameManager.instance.OpenMenu();
+        }
+
             
 
         if (Time.time - lastUpdateRate>indicatorUpdateRate)
