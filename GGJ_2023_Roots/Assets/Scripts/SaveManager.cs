@@ -41,6 +41,7 @@ public class SaveManager : MonoBehaviour
         data.curJobs = GameManager.instance.curJobs;
         data.maxJobs = GameManager.instance.maxJobs;
         data.maxPopulation = GameManager.instance.maxPopulation;
+        data.day = GameManager.instance.day;
 
         // buildings
         Building[] buildingObjects = FindObjectsOfType<Building>();
@@ -77,6 +78,46 @@ public class SaveManager : MonoBehaviour
     }
     void Load()
     {
+        SaveData data = JsonUtility.FromJson<SaveData>(PlayerPrefs.GetString("Save"));
 
+        CameraController.instance.transform.position = data.cameraPos.GetVector3();
+        CameraController.instance.transform.eulerAngles = data.cameraRot.GetVector3();
+
+        //Stats
+        GameManager.instance.nutrients = (int)data.nutrients;
+        GameManager.instance.curFood = (int)data.food;
+        GameManager.instance.curWater = (int)data.water;
+        GameManager.instance.curPopulation = (int)data.curPopulation;
+        GameManager.instance.curJobs = (int)data.curJobs;
+        GameManager.instance.maxJobs= (int)data.maxJobs;
+        GameManager.instance.maxPopulation = (int)data.maxPopulation;
+        GameManager.instance.day = (int)data.day;
+
+        // buildings
+        for (int x = 0; x < data.buildings.Length; x++)
+        {
+            GameObject prefab = ObjectManager.instance.GetBuildingByID(data.buildings[x].buildingId).spawnPrefab;
+            GameObject building = Instantiate(prefab, data.buildings[x].position.GetVector3(), Quaternion.Euler(data.buildings[x].rotation.GetVector3()));
+            //building.GetComponent<Building>().ReceiveCustomProperties(data.buildings[x].customProperties);
+        }
+
+        // destroy all pre existing NPCs
+        NPC[] npcs = FindObjectsOfType<NPC>();
+        for (int x = 0; x < npcs.Length; x++)
+            Destroy(npcs[x].gameObject);
+        // spawn in saved NPCs
+        for (int x = 0; x < data.npcs.Length; x++)
+        {
+            GameObject prefab = ObjectManager.instance.GetNPCByID(data.npcs[x].prefabId).spawnPrefab;
+            GameObject npcObj = Instantiate(prefab, data.npcs[x].position.GetVector3(), Quaternion.Euler(data.npcs[x].rotation.GetVector3()));
+
+            NPC npc = npcObj.GetComponent<NPC>();
+            //npc.aiState = (AIState)data.npcs[x].aiState;
+            //npc.agent.isStopped = !data.npcs[x].hasAgentDestination;
+            //if (!npc.agent.isStopped)
+            //npc.agent.SetDestination(data.npcs[x].agentDestination.GetVector3());
+
+            LightingManager.instance.TimeOfDay = data.timeOfDay;
+        }
     }
 }
