@@ -33,9 +33,16 @@ public class BuildingPlacement : MonoBehaviour
             currentlyDestroying = !currentlyDestroying;
             DestroyInd.SetActive(currentlyDestroying);
         }
-        else
+        else if(Input.GetKeyDown(KeyCode.Escape))
         {
-            GameManager.instance.OpenMenu();
+            if (PauseMenu.GameIsPaused)
+            {
+                PauseMenu.instance.Resume();
+            }
+            else
+            {
+                PauseMenu.instance.Pause();
+            }
         }
 
             

@@ -25,7 +25,7 @@ public class SaveManager : MonoBehaviour
             Load();
         */
     }
-    void Save()
+    public void Save()
     {
         SaveData data = new SaveData();
 
@@ -76,7 +76,7 @@ public class SaveManager : MonoBehaviour
             PlayerPrefs.SetString("Save", rawData);
         }
     }
-    void Load()
+    public void Load()
     {
         SaveData data = JsonUtility.FromJson<SaveData>(PlayerPrefs.GetString("Save"));
 
