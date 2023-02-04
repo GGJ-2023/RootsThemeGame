@@ -9,8 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c16f1082c66dcb5468c064309680c6a0, type: 3}
-  m_Name: Road
+  m_Script: {fileID: 11500000, guid: 445c30f4164d1e74d9c91bd1fb410892, type: 3}
+  m_Name: Food_Large
   m_EditorClassIdentifier: 
-  id: Road
-  spawnPrefab: {fileID: 4318280288599452794, guid: ffa0afcc1e14a504593226973da0fd09, type: 3}
+  cost: 60
+  costPerTurn: 20
+  prefab: {fileID: 6281610173934391553, guid: 8a204b98628c4604f93b5cdbe859b9aa, type: 3}
+  population: 0
+  jobs: 0
+  food: 40
+  water: 0
+  nutrients: 0
