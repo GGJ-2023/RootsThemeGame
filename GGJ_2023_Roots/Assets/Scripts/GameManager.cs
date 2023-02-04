@@ -33,14 +33,19 @@ public class GameManager : MonoBehaviour
 
     public void OnPlaceBuilding(Building building)
     {
-        nutrients -= building.preset.cost;
 
-        maxPopulation += building.preset.population;
-        maxJobs += building.preset.jobs;
-        buildings.Add(building);
+            nutrients -= building.preset.cost;
 
-        UpdateStatText();
+            maxPopulation += building.preset.population;
+            maxJobs += building.preset.jobs;
+            buildings.Add(building);
+
+            UpdateStatText();
+
+
+
     }
+
     public void OnRemoveBuilding(Building building)
     {
         //nutrients += ((1 / 2) * building.preset.cost);
@@ -52,25 +57,23 @@ public class GameManager : MonoBehaviour
 
         UpdateStatText();
     }
+
     void UpdateStatText()
     {
-        statsText.text = string.Format("Day: {0}   Nutrients: {1}   Water: {2}   Food: {3}   Pop: {4} / {5} Jobs: {6} / {7}", 
+        statsText.text = string.Format("Day: {0}   Nutrients: {1}   Water: {2}   Food: {3}   Pop: {4} / {5}   Jobs: {6} / {7}", 
             new object[8] { day, nutrients, curWater, curFood, curPopulation, maxPopulation, curJobs, maxJobs } );
     }
 
     public void EndDay()
     {
-        if (LightingManager.instance.TimeOfDay == 120f)
-        {
-
-        }
         day++;
-        
+
         CalculateJobs();
         CalculatePopulation();
         CalculateResources();
-
+        UpdateStatText();
     }
+
     void CalculateResources()
     {
 
@@ -97,12 +100,6 @@ public class GameManager : MonoBehaviour
         }
         else if (curFood < curPopulation)
             curPopulation = curFood;
-        {
-
-        }
-    }
-    void OpenMenu()
-    {
 
     }
 }
