@@ -18,6 +18,12 @@ public class CameraController : MonoBehaviour
     public float rotateSpeed;
 
     private Camera cam;
+    public static CameraController instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
