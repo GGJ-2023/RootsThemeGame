@@ -9,6 +9,10 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private LightingPreset Preset;
 
     [SerializeField, Range(0, 120)] public float TimeOfDay;
+    public float dayLength;
+    public float counter;
+    public float counterRate;
+    public float startTime = 60f;
 
     public static LightingManager instance;
 
@@ -16,7 +20,12 @@ public class LightingManager : MonoBehaviour
     {
         instance = this;
     }
-
+    private void Start()
+    {
+        counterRate = 120.0f / dayLength;
+        counter = startTime;
+        TimeOfDay = startTime;
+    }
 
     private void Update()
     {
@@ -26,10 +35,12 @@ public class LightingManager : MonoBehaviour
         }
         if (Application.isPlaying)
         {
+
             TimeOfDay += Time.deltaTime;
             TimeOfDay %= 120f;
             UpdateLighting(TimeOfDay / 120f);
-            if (TimeOfDay == 119f)
+            counter += counterRate * Time.deltaTime;
+            if (counter >= 120f)
             {
                 StartCoroutine(UpdateDay());
             }
@@ -43,9 +54,10 @@ public class LightingManager : MonoBehaviour
         {
             GameManager.instance.cannotBuildText.text = string.Format($"Its a new day!");
 
-            yield return new WaitForSeconds(2f);
-
+            counter = 0.0f;
             GameManager.instance.EndDay();
+
+            yield return new WaitForSeconds(1f);
 
             GameManager.instance.cannotBuildText.text = null;
         }
