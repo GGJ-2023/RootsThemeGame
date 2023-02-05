@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     public List<Building> buildings = new List<Building>();
     public static GameManager instance;
+    public Transform buildMenu;
+    public bool menuShowing = false;
     
     void Awake()
     {
@@ -29,6 +31,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateStatText();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B) && menuShowing == false)
+        {
+            
+        }
     }
 
     public void OnPlaceBuilding(Building building)
@@ -113,6 +123,11 @@ public class GameManager : MonoBehaviour
     public void NormalSpeed()
     {
         Time.timeScale = 1f;
+    }
+
+    public void BuildMenu()
+    {
+        
     }
 
 }
