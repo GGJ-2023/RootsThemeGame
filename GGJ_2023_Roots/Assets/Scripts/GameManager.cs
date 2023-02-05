@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B) && PauseMenu.GameIsPaused == false)
         {
             BuildMenu();
         }
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlaceBuilding(Building building)
     {
+        AudioManager.instance.PlaceSound();
 
             nutrients -= building.preset.cost;
 
@@ -60,7 +61,8 @@ public class GameManager : MonoBehaviour
 
     public void OnRemoveBuilding(Building building)
     {
-        //nutrients += ((1 / 2) * building.preset.cost);
+        AudioManager.instance.DestroySound();
+        nutrients += ((1 / 2) * building.preset.cost);
         maxPopulation -= building.preset.population;
         maxJobs -= building.preset.jobs;
         buildings.Remove(building);
@@ -117,11 +119,11 @@ public class GameManager : MonoBehaviour
     }
     public void DoubleSpeedUp()
     {
-        Time.timeScale = 2f;
+        Time.timeScale = 4f;
     }
     public void TripleSpeedUp()
     {
-        Time.timeScale = 3f;
+        Time.timeScale = 8f;
     }
     public void NormalSpeed()
     {
