@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Project
   m_RootView: {fileID: 7}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 881, y: 492}
   m_MaxSize: {x: 16006, y: 14042}
   vertical: 0
-  controlID: 159
+  controlID: 15
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,7 +176,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_MinSize: {x: 605, y: 492}
   m_MaxSize: {x: 12005, y: 14042}
   vertical: 1
-  controlID: 134
+  controlID: 16
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_MinSize: {x: 605, y: 221}
   m_MaxSize: {x: 12005, y: 4021}
   vertical: 0
-  controlID: 135
+  controlID: 17
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -343,21 +343,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Audio
+    - Assets/UI
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Audio
+  - Assets/UI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Original files\Unity\RootsThemeGame\GGJ_2023_Roots
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 29}
-    m_SelectedIDs: 0a400000
-    m_LastClickedID: 16394
+    m_SelectedIDs: 1a400000
+    m_LastClickedID: 16410
     m_ExpandedIDs: 00000000fa3f0000fc3f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -509,21 +509,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6efbffff
+      m_ExpandedIDs: 40e9ffff8cf7ffff64fbffff6cfbffff6efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: RoadButton
+        m_OriginalName: RoadButton
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -5240
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 5}
       m_SearchString: 
@@ -569,9 +569,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1953.3658, y: 1176.4369, z: 620.4492}
+    m_Target: {x: 40, y: 202.445, z: 0}
     speed: 2
-    m_Value: {x: 1953.3658, y: 1176.4369, z: 620.4492}
+    m_Value: {x: 40.000008, y: 202.445, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -618,13 +618,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.055155355, y: 0.016784623, z: 0.000943864, w: 0.9983485}
+    m_Target: {x: 0.08864046, y: 0.03466944, z: -0.0030702527, w: 0.99546796}
     speed: 2
-    m_Value: {x: 0.05515535, y: -0.016784623, z: -0.00094386394, w: -0.9983484}
+    m_Value: {x: 0.09013244, y: 0.034664363, z: -0.003122217, w: 0.99532145}
   m_Size:
-    m_Target: 566.3131
+    m_Target: 56.568542
     speed: 2
-    m_Value: 566.3131
+    m_Value: 56.56855
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -705,7 +705,7 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 1
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
       y: 21
       width: 1145
       height: 569
-    m_Scale: {x: 0.5462963, y: 0.5462963}
+    m_Scale: {x: 0.52685183, y: 0.52685183}
     m_Translation: {x: 572.5, y: 284.5}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -726,12 +726,12 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1047.9661
-      y: -520.77966
-      width: 2095.9321
-      height: 1041.5593
+      x: -1086.6433
+      y: -540
+      width: 2173.2866
+      height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.5462963
+  m_defaultScale: 0.52685183
   m_LastWindowPixelSize: {x: 1145, y: 590}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
