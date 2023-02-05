@@ -21,8 +21,10 @@ public class GameManager : MonoBehaviour
 
     public List<Building> buildings = new List<Building>();
     public static GameManager instance;
-    public Transform buildMenu;
+    
     public bool menuShowing = false;
+
+    public GameObject buildMenu;
     
     void Awake()
     {
@@ -35,9 +37,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B) && menuShowing == false)
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            
+            BuildMenu();
         }
     }
 
@@ -128,7 +130,16 @@ public class GameManager : MonoBehaviour
 
     public void BuildMenu()
     {
-        
+        if(buildMenu != null)
+        {
+            Animator anim = buildMenu.GetComponent<Animator>();
+            if(anim != null)
+            {
+                bool isOpen = anim.GetBool("Open");
+                anim.SetBool("Open", !isOpen);
+            }
+        }
     }
+
 
 }
