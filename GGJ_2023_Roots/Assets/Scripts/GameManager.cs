@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void EndDay()
     {
+        LightingManager.instance.TimeOfDay = 120f;
         day++;
 
         CalculateJobs();

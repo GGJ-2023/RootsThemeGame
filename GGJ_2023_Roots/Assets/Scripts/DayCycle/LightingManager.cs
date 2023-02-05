@@ -29,7 +29,7 @@ public class LightingManager : MonoBehaviour
             TimeOfDay += Time.deltaTime;
             TimeOfDay %= 120f;
             UpdateLighting(TimeOfDay / 120f);
-            if (TimeOfDay >= 119f)
+            if (TimeOfDay == 119f)
             {
                 StartCoroutine(UpdateDay());
             }
