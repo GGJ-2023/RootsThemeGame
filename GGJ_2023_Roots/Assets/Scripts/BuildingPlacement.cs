@@ -55,6 +55,19 @@ public class BuildingPlacement : MonoBehaviour
             {
                 PauseMenu.instance.Resume();
             }
+            else if (GameManager.instance.b_menuShowing == true && GameManager.instance.s_menuShowing == true)
+            {
+                GameManager.instance.SpeedMenu();
+                GameManager.instance.BuildMenu();
+            }
+            else if (GameManager.instance.b_menuShowing == true)
+            {
+                GameManager.instance.BuildMenu();
+            }
+            else if (GameManager.instance.s_menuShowing == true)
+            {
+                GameManager.instance.SpeedMenu();
+            }
             else
             {
                 PauseMenu.instance.Pause();
@@ -91,8 +104,7 @@ public class BuildingPlacement : MonoBehaviour
     }
     public void BeginNewPlacement(BuildingPreset preset)
     {
-        if (currentlyDestroying == true)
-            currentlyDestroying = !currentlyDestroying;
+        DestroyInd.SetActive(false);
         //money check
 
 
@@ -130,7 +142,7 @@ public class BuildingPlacement : MonoBehaviour
                 return;
             }
 
-        if (GameManager.instance.nutrients > preset.cost)
+        if (GameManager.instance.nutrients >= curBuildingPreset.cost)
         {
             GameObject buildingObj = Instantiate(curBuildingPreset.prefab, curIndicatorPos, Quaternion.identity);
             GameManager.instance.OnPlaceBuilding(buildingObj.GetComponent<Building>());
@@ -138,7 +150,7 @@ public class BuildingPlacement : MonoBehaviour
         else
         {
             StartCoroutine(NoNutrients());
-            Debug.LogWarning($"You do not have enough nutrients.");
+            Debug.LogWarning($"This costs {curBuildingPreset.cost} nutrients");
             return;
         }
 
@@ -154,7 +166,7 @@ public class BuildingPlacement : MonoBehaviour
 
             IEnumerator NoNutrients()
             {
-                GameManager.instance.cannotBuildText.text = string.Format($"You do not have enough nutrients.");
+                GameManager.instance.cannotBuildText.text = string.Format($"This costs {curBuildingPreset.cost} nutrients");
 
                 yield return new WaitForSeconds(1f);
 

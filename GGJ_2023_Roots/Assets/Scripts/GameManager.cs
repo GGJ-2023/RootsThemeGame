@@ -12,19 +12,22 @@ public class GameManager : MonoBehaviour
     public int curWater;
     public int maxPopulation;
     public int maxJobs;
-    public int nutrientsIncome;
-    public int foodIncome;
-    public int waterIncome;
+    public int nutrientsIncome = 10;
+    public int taxes;
+    public int nutrientCost;
 
     public TextMeshProUGUI cannotBuildText;
+    public TextMeshProUGUI startText; 
     public TextMeshProUGUI statsText;
 
     public List<Building> buildings = new List<Building>();
     public static GameManager instance;
     
-    public bool menuShowing = false;
+    public bool s_menuShowing = false;
+    public bool b_menuShowing = false;
 
     public GameObject buildMenu;
+    public GameObject speedMenu;
     
     void Awake()
     {
@@ -32,15 +35,39 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        UpdateStatText();
+        startText.text = string.Format($"Press B or V to open a menu");
+        StartBuildingHere();
+        
+        if (statsText != null)
+        {
+            UpdateStatText();
+        }
+
+        IEnumerator StartBuildingHere()
+        {
+            startText.text = string.Format($"Press B or V to open a menu");
+
+            yield return new WaitForSeconds(5f);
+
+            startText.text = null;
+        }
+
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.B) && PauseMenu.GameIsPaused == false)
         {
+            startText.text = null;
             BuildMenu();
         }
+        if (Input.GetKeyDown(KeyCode.V) && PauseMenu.GameIsPaused == false)
+        {
+            startText.text = null;
+            SpeedMenu();
+        }
+        
+
     }
 
     public void OnPlaceBuilding(Building building)
@@ -74,31 +101,54 @@ public class GameManager : MonoBehaviour
 
     void UpdateStatText()
     {
-        statsText.text = string.Format("Day: {0}   Nutrients: {1}   Water: {2}   Food: {3}   Pop: {4} / {5}   Jobs: {6} / {7}", 
-            new object[8] { day, nutrients, curWater, curFood, curPopulation, maxPopulation, curJobs, maxJobs } );
+        statsText.text = string.Format("Day: {0}   Nutrients: {1}   Water: {2}   Food: {3}   Pop: {4} / {5}", 
+            new object[6] { day, nutrients, curWater, curFood, curPopulation, maxPopulation,  } );
     }
 
     public void EndDay()
     {
+        
         LightingManager.instance.TimeOfDay = 120f;
+        LightingManager.instance.counter = 0f;
         day++;
-
-        CalculateJobs();
         CalculatePopulation();
         CalculateResources();
+              
+        
+        if (nutrients < 0)
+            nutrients = 0;
+
+        if (curWater < 0)
+            curWater = 0;
+
+        if (curFood < 0)
+            curFood = 0;
+        if (curPopulation < 0)
+        {
+            curPopulation = 0;
+        }
         UpdateStatText();
     }
 
     void CalculateResources()
     {
+        nutrients += nutrientsIncome + curPopulation/2;
 
-        foreach(Building building in buildings)
+        foreach (Building building in buildings)
         {
-            nutrients -= building.preset.costPerTurn;
             curFood += building.preset.food;
             curWater += building.preset.water;
-            nutrients += building.preset.nutrients;
+            nutrients -= building.preset.costPerTurn;
+            nutrients += building.preset.nutrients + curPopulation/4;
         }
+        if (nutrients < 0)        
+            nutrients = 0;
+        
+        if (curWater < 0)        
+            curWater = 0;
+        
+        if (curFood < 0)
+            curFood = 0;
             
 
     }
@@ -108,13 +158,27 @@ public class GameManager : MonoBehaviour
     }
     void CalculatePopulation()
     {
-        if (curFood >= curPopulation && curPopulation < maxPopulation)
+        
+        if (curFood >= curPopulation && curPopulation <= maxPopulation)
         {
-            curFood -= curPopulation / 4;
-            curPopulation = Mathf.Min(curPopulation + (curFood / 4), maxPopulation);
+
+            curFood -= curPopulation * 4;
+            curWater -= curPopulation  * 2;
+
+            curPopulation = Mathf.Min(curPopulation + (curFood / 8) + (curWater / 6), maxPopulation);
         }
         else if (curFood < curPopulation)
             curPopulation = curFood;
+        if (curPopulation < 0)
+        {
+            curPopulation = 0;
+        }
+        if (maxPopulation < curPopulation)
+        {
+            curPopulation = maxPopulation;
+        }
+
+
 
     }
     public void DoubleSpeedUp()
@@ -132,7 +196,13 @@ public class GameManager : MonoBehaviour
 
     public void BuildMenu()
     {
-        if(buildMenu != null)
+        if (b_menuShowing == false)
+        {
+            b_menuShowing = true;
+        }
+        else if (b_menuShowing == true)
+            b_menuShowing = false;
+        if (buildMenu != null)
         {
             Animator anim = buildMenu.GetComponent<Animator>();
             if(anim != null)
@@ -140,6 +210,26 @@ public class GameManager : MonoBehaviour
                 bool isOpen = anim.GetBool("Open");
                 anim.SetBool("Open", !isOpen);
             }
+        }
+    }
+    public void SpeedMenu()
+    {
+        if (s_menuShowing == false)
+        {
+            s_menuShowing = true;
+        }
+        else if (s_menuShowing == true)
+            s_menuShowing = false;
+
+        if (speedMenu != null)
+        {
+            Animator anim = speedMenu.GetComponent<Animator>();
+            if (anim != null)
+            {
+                bool isOpen = anim.GetBool("Open");
+                anim.SetBool("Open", !isOpen);
+            }
+            
         }
     }
 
