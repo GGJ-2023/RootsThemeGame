@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Food_Small
   m_EditorClassIdentifier: 
   cost: 20
-  costPerTurn: 4
+  costPerTurn: 10
   prefab: {fileID: 6143999565878655771, guid: d4ad6a9b563e9474fbbbd2fca20a2e36, type: 3}
   population: 0
   jobs: 0
-  food: 5
+  food: 10
   water: 0
   nutrients: 0

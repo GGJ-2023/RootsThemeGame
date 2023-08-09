@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445c30f4164d1e74d9c91bd1fb410892, type: 3}
   m_Name: Glow_Shroom
   m_EditorClassIdentifier: 
-  cost: 20
-  costPerTurn: 5
+  cost: 200
+  costPerTurn: 40
   prefab: {fileID: 9183264861329316758, guid: f3994687297ed5a4c958c4062955cd64, type: 3}
   population: 0
   jobs: 0

@@ -17,6 +17,6 @@ MonoBehaviour:
   prefab: {fileID: 6281610173934391553, guid: 8a204b98628c4604f93b5cdbe859b9aa, type: 3}
   population: 0
   jobs: 0
-  food: 40
+  food: 30
   water: 0
   nutrients: 0
