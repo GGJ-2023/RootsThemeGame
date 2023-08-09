@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445c30f4164d1e74d9c91bd1fb410892, type: 3}
   m_Name: House_Large
   m_EditorClassIdentifier: 
-  cost: 40
-  costPerTurn: 10
+  cost: 120
+  costPerTurn: 40
   prefab: {fileID: 5457240163987788118, guid: a93358b7090ff3c4e91d271f498e70cb, type: 3}
   population: 20
   jobs: 0

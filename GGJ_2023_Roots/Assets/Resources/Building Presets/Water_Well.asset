@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Water_Well
   m_EditorClassIdentifier: 
   cost: 20
-  costPerTurn: 4
+  costPerTurn: 10
   prefab: {fileID: 1665946877883021603, guid: 05e0343d7bdad2c4992a11e8dbb7bfd7, type: 3}
   population: 0
   jobs: 0
